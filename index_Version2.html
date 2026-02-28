@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PredictBet - Sports Prediction Platform</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app"></div>
+    
+    <!-- Auth Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-modal">
+            <button class="close-btn" onclick="closeAuthModal()">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="tab-btn active" onclick="switchAuthTab('login')">Login</button>
+                <button class="tab-btn" onclick="switchAuthTab('signup')">Sign Up</button>
+            </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="auth-form active">
+                <h2>Login to PredictBet</h2>
+                <form onsubmit="handleLogin(event)">
+                    <input type="email" placeholder="Email" id="loginEmail" required>
+                    <input type="password" placeholder="Password" id="loginPassword" required>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p class="demo-text">Demo: admin@example.com / admin123</p>
+            </div>
+            
+            <!-- Signup Form -->
+            <div id="signupForm" class="auth-form">
+                <h2>Create Account</h2>
+                <form onsubmit="handleSignup(event)">
+                    <input type="text" placeholder="Username" id="signupUsername" required>
+                    <input type="email" placeholder="Email" id="signupEmail" required>
+                    <input type="password" placeholder="Password" id="signupPassword" required>
+                    <input type="password" placeholder="Confirm Password" id="signupConfirm" required>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Admin Panel Modal -->
+    <div id="adminModal" class="modal">
+        <div class="modal-content admin-modal">
+            <button class="close-btn" onclick="closeAdminModal()">&times;</button>
+            <h2>Admin Panel</h2>
+            
+            <div class="admin-tabs">
+                <button class="admin-tab active" onclick="switchAdminTab('users')">Manage Users</button>
+                <button class="admin-tab" onclick="switchAdminTab('predictions')">Manage Predictions</button>
+            </div>
+            
+            <!-- Users Management -->
+            <div id="usersTab" class="admin-tab-content active">
+                <h3>Update User Balance</h3>
+                <div class="admin-controls">
+                    <select id="userSelect" onchange="loadUserData()">
+                        <option value="">Select a user...</option>
+                    </select>
+                    <input type="number" id="balanceInput" placeholder="New Balance" step="0.01">
+                    <button class="btn btn-primary" onclick="updateUserBalance()">Update Balance</button>
+                </div>
+                <div id="usersList" class="users-list"></div>
+            </div>
+            
+            <!-- Predictions Management -->
+            <div id="predictionsTab" class="admin-tab-content">
+                <h3>Manage Predictions</h3>
+                <div class="admin-controls">
+                    <input type="text" id="predictionTitle" placeholder="Prediction Title">
+                    <select id="predictionOutcome">
+                        <option value="">Select Outcome...</option>
+                        <option value="Option A">Option A</option>
+                        <option value="Option B">Option B</option>
+                        <option value="Draw">Draw</option>
+                    </select>
+                    <input type="number" id="predictionOdds" placeholder="Odds" step="0.01">
+                    <button class="btn btn-primary" onclick="createPrediction()">Create Prediction</button>
+                </div>
+                <div id="predictionsList" class="predictions-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
